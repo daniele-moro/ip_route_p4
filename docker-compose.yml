@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  mininet:
+    image: opennetworking/mn-stratum:latest
+    hostname: mininet
+    volumes:
+      - ./:/ip_route
+    privileged: true
+    ports:
+      - "50001:50001"
+    entrypoint: "python"
+    command: [ "/ip_route/topo.py"]
+    tty: true
+    stdin_open: true
+  p4runtime-shell:
+    hostname: p4runtime-shell
+    image: p4lang/p4runtime-sh:latest
+    volumes:
+      - ./:/ip_route
